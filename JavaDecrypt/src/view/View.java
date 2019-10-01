@@ -18,9 +18,7 @@ public class View {
 	 private JButton decryptButton;
 	 private JButton printDecrypted;
 	 private JButton saveKey;
-	 private JButton exitButton;
 	 private JButton saveDecrypted;
-	 private JButton saveEncrypted;
 	 
 	 public View(int width, int height,String title) {
 		  frame = new JFrame(title);
@@ -31,7 +29,6 @@ public class View {
 		  frame.setLocationRelativeTo(null);
 		  frame.setVisible(true);
 		  
-		  // Create UI elements
 		  pathLabel = new JLabel("Path :");
 		  keyLabel = new JLabel("Key(optionnal) :");
 		  path = new JTextField();
@@ -39,10 +36,7 @@ public class View {
 		  decryptButton = new JButton("Decrypt");
 		  printDecrypted = new JButton("Show cypherDecrypted");
 		  saveKey = new JButton("Save Key");
-		  exitButton = new JButton("Exit");
 		  saveDecrypted = new JButton("Save Decrypted");
-		  saveEncrypted = new JButton("Encrypt and save");
-		  
 		  
 		  GroupLayout layout = new GroupLayout(frame.getContentPane());
 		  layout.setAutoCreateGaps(true);
@@ -50,12 +44,12 @@ public class View {
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(keyLabel))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(key))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(decryptButton).addComponent(saveKey).addComponent(saveEncrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(exitButton).addComponent(saveDecrypted)));
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(decryptButton).addComponent(saveKey))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(saveDecrypted)));
 		  layout.setVerticalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(decryptButton).addComponent(printDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(keyLabel).addComponent(key).addComponent(saveKey).addComponent(exitButton))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(saveDecrypted).addComponent(saveEncrypted)));
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(keyLabel).addComponent(key).addComponent(saveKey))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(saveDecrypted)));
 		  layout.linkSize(SwingConstants.HORIZONTAL, decryptButton);
 		  layout.linkSize(SwingConstants.HORIZONTAL, printDecrypted);
 		  frame.getContentPane().setLayout(layout);
@@ -125,27 +119,11 @@ public class View {
 		this.saveKey = saveKey;
 	}
 
-	public JButton getExitButton() {
-		return exitButton;
-	}
-
-	public void setExitButton(JButton exitButton) {
-		this.exitButton = exitButton;
-	}
-
 	public JButton getSaveDecrypted() {
 		return saveDecrypted;
 	}
 
 	public void setSaveDecrypted(JButton saveDecrypted) {
 		this.saveDecrypted = saveDecrypted;
-	}
-
-	public JButton getSaveEncrypted() {
-		return saveEncrypted;
-	}
-
-	public void setSaveEncrypted(JButton saveEncrypted) {
-		this.saveEncrypted = saveEncrypted;
 	}
 }

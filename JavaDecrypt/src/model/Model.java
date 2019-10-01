@@ -11,13 +11,24 @@ public class Model {
  	private CrackXor crackXor;
  	private String cypherText;
  	private String clearText;
- 	private CLctrlCrypt o1;
  	private String key;
  
  	public Model(String path, String keyLength) {
  		this.path = path;
  		this.keyLength = keyLength;
  	}
+ 	
+	public void setCrack() throws IOException {
+		String fileName = this.getPath();
+		String content = new String(Files.readAllBytes(Paths.get(fileName)));
+		this.setCypherText(content);
+		this.setCrackXor(new CrackXor(this.getCypherText()));
+		if(this.key!= null) {
+			this.setClearText(this.getCrackXor().decode_operation(content, this.key.getBytes()));
+		}else {
+			this.setClearText(this.getCrackXor().decode_operation(content, this.crackXor.getKey().getBytes()));	
+		}
+	}
  
  	public String getPath() {
  		return path;
@@ -37,20 +48,6 @@ public class Model {
 
 	public CrackXor getCrackXor() {
 		return crackXor;
-	}
-
-	public void setCrack() throws IOException {
-
-		this.o1 = new CLctrlCrypt();
-		String fileName = this.getPath();
-		String content = new String(Files.readAllBytes(Paths.get(fileName)));
-		this.setCypherText(content);
-		if(this.key!= null) {
-			this.setClearText(o1.decode_operation(content, this.key.getBytes()));
-		}else {
-			this.crackXor = new CrackXor(this.getCypherText());
-			this.setClearText(o1.decode_operation(content, this.crackXor.getKey().getBytes()));	
-		}
 	}
 
 	public String getCypherText() {
@@ -79,5 +76,9 @@ public class Model {
 
 	public void setKey(String key) {
 		this.key = key;
+	}
+
+	public void setCrackXor(CrackXor crackXor) {
+		this.crackXor = crackXor;
 	}
 }

@@ -3,8 +3,6 @@ package model.crack;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
-import model.CLctrlCrypt;
-
 public class CrackXor extends Crack {
 
     ArrayList<Block> textBlocks;
@@ -54,7 +52,7 @@ public class CrackXor extends Crack {
 				double scored = 0;
 				for (int byteIndex = 0; byteIndex < block.getList().size(); byteIndex++) {
 					output[0] = block.getList().get(byteIndex).byteValue();
-					String xored = CLctrlCrypt.encode_using_xor(output,output1);
+					String xored = this.encode_using_xor(output,output1);
 					scored = scored + this.scoreDecryptedBytes(xored);
 				}
 				block.addScore(new Score((char) key, scored));
@@ -63,15 +61,45 @@ public class CrackXor extends Crack {
 	}
 	
 	private void recomposeKey() {
-		System.out.print("Recomposition de la cle : ");
 		String key = "";
 		for(Block block : this.transposedBlocks) {
 			key = key + block.getBestScoreKeyChar();
 		}
 		key = key.toLowerCase();
-		System.out.println(key);
-		System.out.println("FIN DE LA CLE");
 		this.setKey(key);
+	}
+	
+	public String encode_using_xor(final byte[] input, final byte[] secret) {
+        final byte[] output = new byte[input.length];
+        if (secret.length == 0) {
+            throw new IllegalArgumentException("empty security key");
+        }
+        int spos = 0;
+        for (int pos = 0; pos < input.length; ++pos) {
+            output[pos] = (byte) (input[pos] ^ secret[spos]);
+            ++spos;
+            if (spos >= secret.length) {
+                spos = 0;
+            }
+        }
+        return new String(output);
+    }
+	
+	public String decode_operation(String s,final byte[] key){
+		int spos = 0;
+		try{
+			byte [] output=s.getBytes();
+        for (int pos = 0; pos < output.length; ++pos) {
+            output[pos] = (byte) (output[pos] ^ key[spos]);
+            ++spos;
+            if (spos >= key.length) {
+                spos = 0;
+            }
+        }
+        return new String(output, "UTF-8");
+        }catch(Exception e){	
+        }
+		return null;
 	}
 
 }

@@ -1,5 +1,11 @@
 package model.crack;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ToolsRefacto {
@@ -114,5 +120,31 @@ public class ToolsRefacto {
 		}
 		blocks.add(new Block(bytesOfCurrentBlock, count));
 		return blocks;
+	}
+	
+	public static void ecrireUnFichier(String path, String texte) {
+		File file = new File(path);
+		try {
+			FileWriter fileWriter = new FileWriter(file);
+			fileWriter.write(texte);
+			fileWriter.flush();
+			fileWriter.close();
+		} catch (IOException e) {
+			System.out.println("Erreur lors de l'écriture du fichier");
+			e.printStackTrace();
+		}
+	}
+	
+	public String lireFichierSimple(String path) {
+        StringBuilder sb = new StringBuilder();
+        try (BufferedReader br = Files.newBufferedReader(Paths.get(path))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+        } catch (IOException e) {
+            System.err.format("IOException: %s%n", e);
+        }
+        return sb.toString();
 	}
 }
