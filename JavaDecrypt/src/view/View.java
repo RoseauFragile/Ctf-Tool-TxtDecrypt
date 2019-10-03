@@ -8,7 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class View {
+public class View{
 
 	 private JFrame frame;
 	 private JLabel pathLabel;
@@ -19,8 +19,15 @@ public class View {
 	 private JButton printDecrypted;
 	 private JButton saveKey;
 	 private JButton saveDecrypted;
+	 private static int WIDTH = 1000;
+	 private static int HEIGHT = 150;
+	 private static String TITLE = "CRACK XOR VIGENERE";
 	 
-	 public View(int width, int height,String title) {
+	 public View() {
+		 this.initView(WIDTH, HEIGHT, TITLE);
+	 }
+	 
+	 private void initView(int width, int height,String title) {
 		  frame = new JFrame(title);
 		  frame.getContentPane().setLayout(new BorderLayout());
 		  frame.getContentPane().setLayout(new BorderLayout());

@@ -23,6 +23,7 @@ public class ControllerFrame {
 	}
 	
 	public void initController() {
+		System.out.println("TEST");
 		view.getDecryptButton().addActionListener(e -> {
 			try {
 				decryptCypher();
@@ -47,6 +48,7 @@ public class ControllerFrame {
 	}
 
 	private void decryptCypher() throws IOException {
+		System.out.println("TEST");
 		model.setPath(view.getPath().getText());
 		model.setCrack();
 		view.getKey().setText(model.getCrackXor().getKey());
