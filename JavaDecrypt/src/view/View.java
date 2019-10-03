@@ -1,8 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.io.File;
+
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -22,6 +25,7 @@ public class View{
 	 private static int WIDTH = 1000;
 	 private static int HEIGHT = 150;
 	 private static String TITLE = "CRACK XOR VIGENERE";
+	 private JFileChooser chooser; 
 	 
 	 public View() {
 		 this.initView(WIDTH, HEIGHT, TITLE);
@@ -132,5 +136,16 @@ public class View{
 
 	public void setSaveDecrypted(JButton saveDecrypted) {
 		this.saveDecrypted = saveDecrypted;
+	}
+
+	public JFileChooser getChooser() {
+		return chooser;
+	}
+
+	public void setChooser() {
+		this.chooser = new JFileChooser(); 
+		chooser.setCurrentDirectory(new File("/")); 
+		chooser.changeToParentDirectory(); 
+		chooser.showOpenDialog(null);
 	}
 }
