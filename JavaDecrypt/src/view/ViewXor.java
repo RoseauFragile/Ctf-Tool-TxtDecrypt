@@ -7,8 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JProgressBar;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
 
 public class ViewXor{
 
@@ -22,14 +22,29 @@ public class ViewXor{
 	 private static int WIDTH = 1000;
 	 private static int HEIGHT = 700;
 	 private static String TITLE = "CRACK XOR VIGENERE";
-	 private JFileChooser chooser; 
+	 private JFileChooser chooser;
+	 private JProgressBar progressBar; 
 	 
 	 public ViewXor() {
 		 this.initView(WIDTH, HEIGHT, TITLE);
 	 }
 	 
 	 private void initView(int width, int height,String title) {
-	      BackgroundPanel back = new BackgroundPanel("tsoi.jpg");
+	      
+		  pathLabel = new JLabel("Path :");
+		  path = new JTextField();
+		  decryptButton = new JButton("Decrypt");
+		  printDecrypted = new JButton("Show cypherDecrypted");
+		  chooseFile = new JButton("Choose File");
+		  saveDecrypted = new JButton("Save Decrypted");
+		  progressBar = new JProgressBar(0, 100);
+		  progressBar.setValue(0);
+		  progressBar.setStringPainted(true);
+		  
+		  BackgroundPanel back = new BackgroundPanel("tsoi.jpg");
+
+	      
+	      
 		  frame = new JFrame(title);
 		  frame.getContentPane().setLayout(new BorderLayout());
 		  frame.getContentPane().setLayout(new BorderLayout());
@@ -37,28 +52,22 @@ public class ViewXor{
 		  frame.setSize(width, height);
 		  frame.setLocationRelativeTo(null);
 		  frame.setVisible(true);
-		  
-		  pathLabel = new JLabel("Path :");
-		  path = new JTextField();
-		  decryptButton = new JButton("Decrypt");
-		  printDecrypted = new JButton("Show cypherDecrypted");
-		  chooseFile = new JButton("Choose File");
-		  saveDecrypted = new JButton("Save Decrypted");
-
 		  frame.setContentPane(back);
+		  
+		  
 		  GroupLayout layout = new GroupLayout(frame.getContentPane());
 		  layout.setAutoCreateGaps(true);
 		  layout.setAutoCreateContainerGaps(true);
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(decryptButton))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile).addComponent(decryptButton))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(progressBar))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(saveDecrypted)));
 		  layout.setVerticalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(printDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(chooseFile).addComponent(decryptButton).addComponent(saveDecrypted)));
-		  layout.linkSize(SwingConstants.HORIZONTAL, decryptButton);
-		  layout.linkSize(SwingConstants.HORIZONTAL, printDecrypted);
-		  back.setLayout(layout);  
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(chooseFile).addComponent(progressBar).addComponent(saveDecrypted))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(decryptButton)));		  
+		  back.setLayout(layout);
+		  progressBar.setIndeterminate(true);
 	 }
 	 
 	 public JFrame getFrame() {
@@ -119,6 +128,14 @@ public class ViewXor{
 
 	public JFileChooser getChooser() {
 		return chooser;
+	}
+	
+	public JProgressBar getProgressBar() {
+		return progressBar;
+	}
+
+	public void setProgressBar(JProgressBar progressBar) {
+		this.progressBar = progressBar;
 	}
 
 	public String setChooser() {

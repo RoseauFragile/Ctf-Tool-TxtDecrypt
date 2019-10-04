@@ -16,7 +16,6 @@ public class ControllerFrame {
 		view = v;
 	}
 	
-	
 	public void initController() {
 		view.getDecryptButton().addActionListener(e -> {
 			try {
@@ -43,6 +42,8 @@ public class ControllerFrame {
 	private void decryptCypher() throws IOException {
 		model.setPath(view.getPath().getText());
 		model.setCrack();
+		view.getProgressBar().setValue(100);
+		view.getProgressBar().setIndeterminate(false);
 	}
 	
 	private void printDecrypted() {
