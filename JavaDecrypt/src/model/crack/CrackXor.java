@@ -2,18 +2,24 @@ package model.crack;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class CrackXor extends Crack {
 
     ArrayList<Block> textBlocks;
     ArrayList<Block> transposedBlocks;
-	
+    private static int KEYSIZE_MIN = 2;
+    private static int KEYSIZE_MAX = 42;
+   // private static int KEYSIZE = 12;
+    private int keyGuessed;
+
 	public CrackXor(String cyphertext) throws UnsupportedEncodingException {
 		super(cyphertext);
 		this.crackXor();
 	}
 	
 	private void crackXor() {
+		this.keyGuessed = this.guessTheKey();
 		try {
 			this.refactoreCypherText();
 		} catch (UnsupportedEncodingException e) {
@@ -26,7 +32,7 @@ public class CrackXor extends Crack {
 	
 	private void refactoreCypherText() throws UnsupportedEncodingException {
         this.setInput(this.getCypherText().getBytes("UTF-8"));
-        this.textBlocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText());
+        this.textBlocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), this.keyGuessed);
         this.transposedBlocks = ToolsRefacto.transposeAllBlocksByIndex(this.textBlocks);
 	}
 	
@@ -101,5 +107,45 @@ public class CrackXor extends Crack {
         }
 		return null;
 	}
+	
+	private int guessTheKey() {
+		List<Integer> keys = new ArrayList<Integer>(); 
+		for(int i = KEYSIZE_MIN; i <= KEYSIZE_MAX; i++) {
+			ArrayList<Block> blocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), i);
+			Block block1 = blocks.get(0);
+			Block block2 = blocks.get(1);
+			block1.showList();
+			block2.showList();
+			System.out.println("Taille de list block1 : " + block1.getList().size());
+			System.out.println("Taille de list block2 : " + block2.getList().size());
+			System.out.println("Nombre de blocs : " + blocks.size() + " hamming : "+this.hammingDist(block1.getEntirebytes(), block2.getEntirebytes()));
+			keys.add(i);
+		}
+		return 12;
+	}
+	
+	private int hammingDist(byte[] bs, byte[] bs2) 
+	{ 
+	    int hammingDist = 0;
 
+        for (int pos = 0; pos < bs.length; ++pos) {
+        	hammingDist = hammingDist + this.d(bs[pos],bs2[pos]);
+        }
+	    return hammingDist;
+	}
+	
+    public int d(byte x, byte y) {
+        return d((int)x, (int)y);
+    }
+	
+    public int d(int x, int y) {
+        int dist = 0;
+        int val = x ^ y;
+        while (val != 0) {
+            ++dist;
+            val &= val - 1;
+        }
+        return dist;
+    }
 }
+

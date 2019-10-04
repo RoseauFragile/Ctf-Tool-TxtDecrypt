@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ToolsRefacto {
-	final static int KEY_SIZE = 12;
 	
 	public static String convertStringToBinary(String s) {
 	      byte[] bytes = s.getBytes();
@@ -102,9 +101,9 @@ public class ToolsRefacto {
 		return blockss;
 	}
 	
-	public static ArrayList<Block> parseCypherTextToBlock(String cyphertext) {
+	public static ArrayList<Block> parseCypherTextToBlock(String cyphertext,int keySize) {
 		byte[] bytesOfText;
-		byte[] bytesOfCurrentBlock = new byte[KEY_SIZE];
+		byte[] bytesOfCurrentBlock = new byte[keySize];
 		
 		ArrayList<Block> blocks = new ArrayList<Block>();
 		bytesOfText = cyphertext.getBytes();
@@ -113,7 +112,7 @@ public class ToolsRefacto {
 		for(int i = 0; i < bytesOfText.length; i++) {
 			bytesOfCurrentBlock[count] = bytesOfText[i];
 			count = count +1;
-			if(count == 12) {
+			if(count == keySize) {
 				blocks.add(new Block(bytesOfCurrentBlock, count));
 				count = 0;
 			}

@@ -7,8 +7,10 @@ public class Block {
 	public int lenght;
 	private ArrayList<Score> listScore;
 	private char bestScoreChar;
+	private byte[] entirebytes;
 	
 	public Block(byte[] bytes, int lenght) {
+		this.setEntirebytes(bytes);
 		this.lenght = lenght;
 		this.setList(bytes);
 		this.listScore = new ArrayList<Score>();
@@ -25,6 +27,14 @@ public class Block {
 		for(int i = 0; i < this.lenght; i++) {
 			this.list.add((int) bytes[i]);
 		}
+	}
+	
+	public void showList() {
+		System.out.println();
+		for (int i = 0;i<this.list.size();i++){
+			System.out.print(this.list.get(i).toString());
+		}
+		System.out.println();
 	}
 	
 	public void setList(ArrayList<Integer> list) {
@@ -62,5 +72,13 @@ public class Block {
 		}
 		this.bestScoreChar = (keys.get(index)).charAt(0);
 		return this.bestScoreChar;
+	}
+
+	public byte[] getEntirebytes() {
+		return entirebytes;
+	}
+
+	public void setEntirebytes(byte[] entirebytes) {
+		this.entirebytes = entirebytes;
 	}
 }
