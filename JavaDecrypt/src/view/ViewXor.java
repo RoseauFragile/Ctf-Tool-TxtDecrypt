@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.io.File;
-
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -11,27 +10,26 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class View{
+public class ViewXor{
 
 	 private JFrame frame;
 	 private JLabel pathLabel;
-	 private JLabel keyLabel;
 	 private JTextField path;
-	 private JTextField key;
 	 private JButton decryptButton;
 	 private JButton printDecrypted;
-	 private JButton saveKey;
+	 private JButton chooseFile;
 	 private JButton saveDecrypted;
 	 private static int WIDTH = 1000;
-	 private static int HEIGHT = 150;
+	 private static int HEIGHT = 700;
 	 private static String TITLE = "CRACK XOR VIGENERE";
 	 private JFileChooser chooser; 
 	 
-	 public View() {
+	 public ViewXor() {
 		 this.initView(WIDTH, HEIGHT, TITLE);
 	 }
 	 
 	 private void initView(int width, int height,String title) {
+	      BackgroundPanel back = new BackgroundPanel("tsoi.jpg");
 		  frame = new JFrame(title);
 		  frame.getContentPane().setLayout(new BorderLayout());
 		  frame.getContentPane().setLayout(new BorderLayout());
@@ -41,29 +39,26 @@ public class View{
 		  frame.setVisible(true);
 		  
 		  pathLabel = new JLabel("Path :");
-		  keyLabel = new JLabel("Key(optionnal) :");
 		  path = new JTextField();
-		  key = new JTextField();
 		  decryptButton = new JButton("Decrypt");
 		  printDecrypted = new JButton("Show cypherDecrypted");
-		  saveKey = new JButton("Save Key");
+		  chooseFile = new JButton("Choose File");
 		  saveDecrypted = new JButton("Save Decrypted");
-		  
+
+		  frame.setContentPane(back);
 		  GroupLayout layout = new GroupLayout(frame.getContentPane());
 		  layout.setAutoCreateGaps(true);
 		  layout.setAutoCreateContainerGaps(true);
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(keyLabel))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(key))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(decryptButton).addComponent(saveKey))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(decryptButton))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(saveDecrypted)));
 		  layout.setVerticalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(decryptButton).addComponent(printDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(keyLabel).addComponent(key).addComponent(saveKey))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(saveDecrypted)));
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(printDecrypted))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(chooseFile).addComponent(decryptButton).addComponent(saveDecrypted)));
 		  layout.linkSize(SwingConstants.HORIZONTAL, decryptButton);
 		  layout.linkSize(SwingConstants.HORIZONTAL, printDecrypted);
-		  frame.getContentPane().setLayout(layout);
+		  back.setLayout(layout);  
 	 }
 	 
 	 public JFrame getFrame() {
@@ -82,28 +77,12 @@ public class View{
 	  this.pathLabel = pathLabel;
 	 }
 	 
-	 public JLabel getKeyLabel() {
-	  return keyLabel;
-	 }
-	 
-	 public void setKeyLabel(JLabel keyLengthLabel) {
-	  this.keyLabel = keyLengthLabel;
-	 }
-	 
 	 public JTextField getPath() {
 	  return path;
 	 }
 	 
 	 public void setPath(JTextField path) {
 	  this.path = path;
-	 }
-	 
-	 public JTextField getKey() {
-	  return key;
-	 }
-	 
-	 public void setKey(JTextField keyLenght) {
-	  this.key = keyLenght;
 	 }
 	 
 	 public JButton getDecryptButton() {
@@ -122,12 +101,12 @@ public class View{
 	  this.printDecrypted = hello;
 	 }
 
-	public JButton getSaveKey() {
-		return saveKey;
+	public JButton getChooseFile() {
+		return chooseFile;
 	}
 
-	public void setSaveKey(JButton saveKey) {
-		this.saveKey = saveKey;
+	public void setChooseFile(JButton chooseFile) {
+		this.chooseFile = chooseFile;
 	}
 
 	public JButton getSaveDecrypted() {
@@ -142,10 +121,26 @@ public class View{
 		return chooser;
 	}
 
-	public void setChooser() {
+	public String setChooser() {
 		this.chooser = new JFileChooser(); 
 		chooser.setCurrentDirectory(new File("/")); 
 		chooser.changeToParentDirectory(); 
 		chooser.showOpenDialog(null);
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		File file = chooser.getSelectedFile();
+		String fullPath = file.getAbsolutePath();
+		return fullPath;
+	}
+	
+	public String setChooserSave() {
+		this.chooser = new JFileChooser(); 
+		chooser.setCurrentDirectory(new File("/")); 
+		chooser.changeToParentDirectory(); 
+		JButton save = new JButton("Save to file");
+		chooser.showSaveDialog(save);
+		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+		File file = chooser.getSelectedFile();
+		String fullPath = file.getAbsolutePath()+".txt";
+		return fullPath;
 	}
 }

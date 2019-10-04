@@ -1,7 +1,7 @@
 package view;
 
 public class ViewFacade {
-	private View xorView;
+	private ViewXor xorView;
 	private MenuView menuView;
 	
 	public ViewFacade() {
@@ -16,12 +16,12 @@ public class ViewFacade {
 		this.menuView = menuView;
 	}
 
-	public View getXorView() {
+	public ViewXor getXorView() {
 		return xorView;
 	}
 
 	public void setXorView() {
-		this.xorView = new View();
+		this.xorView = new ViewXor();
 		this.getMenuView().getFrame().setVisible(false);
 	}
 	
