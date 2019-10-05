@@ -14,8 +14,8 @@ public class CrackXor extends Crack {
     ArrayList<Block> textBlocks;
     ArrayList<Block> transposedBlocks;
     private static int KEYSIZE_MIN = 2;
-    private static int KEYSIZE_MAX = 12;
-    private int keyGuessed;
+    private static int KEYSIZE_MAX = 40 ;
+    private int keySizeGuessed;
 
 	public CrackXor(String cyphertext) throws UnsupportedEncodingException {
 		super(cyphertext);
@@ -23,7 +23,7 @@ public class CrackXor extends Crack {
 	}
 	
 	private void crackXor() {
-		this.keyGuessed = this.guessTheKey()[0];
+		this.keySizeGuessed = this.guessTheKey()[0];
 		try {
 			this.refactoreCypherText();
 		} catch (UnsupportedEncodingException e) {
@@ -36,8 +36,8 @@ public class CrackXor extends Crack {
 	
 	private void refactoreCypherText() throws UnsupportedEncodingException {
         this.setInput(this.getCypherText().getBytes("UTF-8"));
-        this.textBlocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), this.keyGuessed);
-        this.transposedBlocks = ToolsRefacto.transposeAllBlocksByIndex(this.textBlocks);
+        this.textBlocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), this.keySizeGuessed);
+        this.transposedBlocks = ToolsRefacto.transposeAllBlocksByIndex(this.textBlocks, this.keySizeGuessed);
 	}
 	
 	private double scoreDecryptedBytes(String decryption) {
@@ -48,7 +48,7 @@ public class CrackXor extends Crack {
 		double score = 0;
 		String letters = lettres.toLowerCase();
 		for(int i =0; i < letters.length();i ++) {
-			score = score + ToolsCrack.getScoreLetter(letters.charAt(i));
+			score = score + ToolsCrack.getScoreLetterEnglish(letters.charAt(i));
 		}
 		return score;
 	}
@@ -138,6 +138,10 @@ public class CrackXor extends Crack {
 	   
 	   for(int i = 0; i < 4; i++){
 		   keysGuessing[i] = keys.get(i).getKeySize();
+	   }
+	   
+	   for(int i = 0; i < keys.size(); i++) {
+		   System.out.println(keys.get(i));
 	   }
 		return keysGuessing;
 	}

@@ -73,6 +73,31 @@ public class Block {
 		this.bestScoreChar = (keys.get(index)).charAt(0);
 		return this.bestScoreChar;
 	}
+	
+	public char getSecondBestScoreKeyChar() {
+		ArrayList<Double> keyScores= new ArrayList<Double>();
+		ArrayList<String> keys = new ArrayList<String>();
+		int index = 0;
+		
+		for(Score score : this.listScore) {
+			keyScores.add(score.getScore());
+			String s = String.valueOf(score.getLetter());
+			keys.add(s);
+		}
+		
+		double max = keyScores.get(0);
+
+		for (int i = 0; i < keyScores.size(); i++) 
+		{
+			if (max < keyScores.get(i)) 
+			{
+				max = keyScores.get(i);
+				index = i;
+			}
+		}
+		this.bestScoreChar = (keys.get(index+1)).charAt(0);
+		return this.bestScoreChar;
+	}
 
 	public byte[] getEntirebytes() {
 		return entirebytes;

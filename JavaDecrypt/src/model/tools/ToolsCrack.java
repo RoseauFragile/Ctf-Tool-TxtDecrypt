@@ -1,7 +1,7 @@
 package model.tools;
 
 public class ToolsCrack {
-	public static double getScoreLetter(char charAt) {
+	public static double getScoreLetterFrench(char charAt) {
 		switch(charAt) {
 		case 'a':
 			return 7.11;
@@ -55,6 +55,65 @@ public class ToolsCrack {
 			return 0.17;
 		case 'z':
 			return 0.15;
+		default:
+			return 0.01;
+		}
+	}
+	
+	public static double getScoreLetterEnglish(char charAt) {
+		switch(charAt) {
+		case 'a':
+			return 8.17;
+		case 'b':
+			return 1.29;
+		case 'c':
+			return 2.78;
+		case 'd':
+			return 4.25;
+		case 'e':
+			return 12.70;
+		case 'f':
+			return 2.23;
+		case 's':
+			return 6.33;
+		case 't':
+			return 9.06;
+		case 'i':
+			return 6.97;
+		case 'r':
+			return 5.99;
+		case 'n':
+			return 6.75;
+		case 'u':
+			return 2.76;
+		case 'l':
+			return 4.03;
+		case 'o':
+			return 7.51;
+		case 'm':
+			return 2.41;
+		case 'p':
+			return 1.93;
+		case 'v':
+			return 0.98;
+		case 'g':
+			return 2.02;
+		case 'h':
+			return 6.09;
+		case 'q':
+			return 0.10;
+		case 'y':
+			return 1.97;
+		case 'x':
+			return 0.15;
+		case 'j':
+			return 0.15;
+		case 'k':
+			return 0.77;
+		case 'w':
+			return 2.63;
+		case 'z':
+			return 0.07;
 		default:
 			return 0.01;
 		}

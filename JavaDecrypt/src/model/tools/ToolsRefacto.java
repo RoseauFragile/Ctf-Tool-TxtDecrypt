@@ -26,78 +26,23 @@ public class ToolsRefacto {
 	      return binary.toString();
 	}
 		
-	public static ArrayList<Block> transposeAllBlocksByIndex(ArrayList<Block> blocks){
+	public static ArrayList<Block> transposeAllBlocksByIndex(ArrayList<Block> blocks, int keySizeGuessed){
 		ArrayList<Block> blockss = new ArrayList<Block>();
-		ArrayList<Integer> index0 = new ArrayList<Integer>();
-		ArrayList<Integer> index1 = new ArrayList<Integer>();
-		ArrayList<Integer> index2 = new ArrayList<Integer>();
-		ArrayList<Integer> index3 = new ArrayList<Integer>();
-		ArrayList<Integer> index4 = new ArrayList<Integer>();
-		ArrayList<Integer> index5 = new ArrayList<Integer>();
-		ArrayList<Integer> index6 = new ArrayList<Integer>();
-		ArrayList<Integer> index7 = new ArrayList<Integer>();
-		ArrayList<Integer> index8 = new ArrayList<Integer>();
-		ArrayList<Integer> index9 = new ArrayList<Integer>();
-		ArrayList<Integer> index10 = new ArrayList<Integer>();
-		ArrayList<Integer> index11 = new ArrayList<Integer>();
-								
+		ArrayList<ArrayList<Integer>> indexs = new ArrayList<ArrayList<Integer>>(); 
+		for(int i =0; i < keySizeGuessed;i++) {
+			indexs.add(new ArrayList<Integer>());
+		}
+		
 		for(Block block : blocks) {
 			ArrayList<Integer> list = block.getList();
 			for(int i =0; i < list.size(); i++) {
-				switch(i) {
-				 case 0:
-					 index0.add(list.get(i));
-					 break;
-				 case 1:
-					 index1.add(list.get(i));
-					 break;
-				 case 2:
-					 index2.add(list.get(i));
-					 break;
-				 case 3:
-					 index3.add(list.get(i));
-					 break;
-				 case 4:
-					 index4.add(list.get(i));
-					 break;
-				 case 5:
-					 index5.add(list.get(i));
-					 break;
-				 case 6:
-					 index6.add(list.get(i));
-					 break;
-				 case 7:
-					 index7.add(list.get(i));
-					 break;
-				 case 8:
-					 index8.add(list.get(i));
-					 break;
-				 case 9:
-					 index9.add(list.get(i));
-					 break;
-				 case 10:
-					 index10.add(list.get(i));
-					 break;
-				 case 11:
-					 index11.add(list.get(i));
-					 break;
-				 default:
-					 System.out.println("Erreur au moment de transpose");
+					indexs.get(i).add(list.get(i));
 				}
 			}
+		
+		for(ArrayList<Integer> integ : indexs) {
+			blockss.add(new Block(integ,integ.size()));
 		}
-		blockss.add(new Block(index0,index0.size()));
-		blockss.add(new Block(index1,index1.size()));
-		blockss.add(new Block(index2,index2.size()));
-		blockss.add(new Block(index3,index3.size()));
-		blockss.add(new Block(index4,index4.size()));
-		blockss.add(new Block(index5,index5.size()));
-		blockss.add(new Block(index6,index6.size()));
-		blockss.add(new Block(index7,index7.size()));
-		blockss.add(new Block(index8,index8.size()));
-		blockss.add(new Block(index9,index9.size()));
-		blockss.add(new Block(index10,index10.size()));
-		blockss.add(new Block(index11,index11.size()));
 		return blockss;
 	}
 	
