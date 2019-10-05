@@ -1,4 +1,4 @@
-package model.crack;
+package model.tools;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -115,6 +115,7 @@ public class ToolsRefacto {
 			if(count == keySize) {
 				blocks.add(new Block(bytesOfCurrentBlock, count));
 				count = 0;
+				bytesOfCurrentBlock = new byte[keySize];
 			}
 		}
 		blocks.add(new Block(bytesOfCurrentBlock, count));

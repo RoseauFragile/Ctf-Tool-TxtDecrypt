@@ -5,7 +5,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Model;
-import model.crack.ToolsRefacto;
+import model.tools.ToolsRefacto;
 import view.ViewXor;
 
 public class ControllerFrame {

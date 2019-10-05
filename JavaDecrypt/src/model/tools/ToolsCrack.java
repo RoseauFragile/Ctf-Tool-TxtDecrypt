@@ -1,4 +1,4 @@
-package model.crack;
+package model.tools;
 
 public class ToolsCrack {
 	public static double getScoreLetter(char charAt) {
@@ -59,4 +59,24 @@ public class ToolsCrack {
 			return 0.01;
 		}
 	}
+	
+	public static int hammingDist(byte[] bs, byte[] bs2) 
+	{ 
+	    int hammingDist = 0;
+
+        for (int pos = 0; pos < bs.length; ++pos) {
+        	hammingDist = hammingDist + distanceByte(bs[pos],bs2[pos]);
+        }
+	    return hammingDist;
+	}
+	
+    private static int distanceByte(byte x, byte y) {
+        int dist = 0;
+        byte val = (byte) (x ^ y);
+        while (val != 0) {
+            ++dist;
+            val &= val - 1;
+        }
+        return dist;
+    }
 }

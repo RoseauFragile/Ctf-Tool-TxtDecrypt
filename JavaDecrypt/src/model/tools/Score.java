@@ -1,4 +1,4 @@
-package model.crack;
+package model.tools;
 
 public class Score {
 	private char letter;
