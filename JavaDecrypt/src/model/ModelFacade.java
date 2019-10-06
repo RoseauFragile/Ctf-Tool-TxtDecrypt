@@ -3,12 +3,12 @@ package model;
 public class ModelFacade {
 	private Model model;
 
-	public ModelFacade(String path, String keyLength) {
-		this.setModel(new Model(path, keyLength));
+	public ModelFacade() {
+	
 	}
 	
-	public ModelFacade() {
-		// TODO Auto-generated constructor stub
+	public ModelFacade(Model model) {
+		this.setModel(model);
 	}
 
 	public Model getModel() {

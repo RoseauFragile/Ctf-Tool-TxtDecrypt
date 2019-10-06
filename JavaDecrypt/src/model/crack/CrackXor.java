@@ -3,6 +3,8 @@ package model.crack;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import model.Model;
 import model.tools.Block;
 import model.tools.KeySizeHammingDistance;
 import model.tools.Score;
@@ -16,14 +18,37 @@ public class CrackXor extends Crack {
     private static int KEYSIZE_MIN = 2;
     private static int KEYSIZE_MAX = 40 ;
     private int keySizeGuessed;
+    private int[] fiveFirstIntKeys;
 
-	public CrackXor(String cyphertext) throws UnsupportedEncodingException {
-		super(cyphertext);
+	public CrackXor(String cyphertext, int language, Model model) throws UnsupportedEncodingException {
+		super(cyphertext, language, model);
 		this.crackXor();
 	}
 	
 	private void crackXor() {
-		this.keySizeGuessed = this.guessTheKey()[0];
+		this.setFiveFirstIntKeys(this.guessTheKeySize());
+		this.setFiveFirstkeys();
+		
+		for(int i = 0 ; i< 5;i++) {
+			System.out.println("Test + " +this.getFiveFirstIntKeys()[i]);
+			this.keySizeGuessed = this.getFiveFirstIntKeys()[i];
+			try {
+				this.refactoreCypherText();
+			} catch (UnsupportedEncodingException e) {
+				System.out.println("Erreur dans le formatage du fichier chiffre");
+				e.printStackTrace();
+			}
+			this.scoreEachBlock();
+			this.recomposeKey();
+			this.getFiveFirstkeys()[i]= this.getKey();
+		}
+		
+		System.out.println("Most probable keys : ");
+		for(int i = 0; i<this.getFiveFirstkeys().length;i++) {
+			System.out.println(this.getFiveFirstkeys()[i]);
+		}
+		
+		this.keySizeGuessed = this.guessTheKeySize()[0];
 		try {
 			this.refactoreCypherText();
 		} catch (UnsupportedEncodingException e) {
@@ -48,7 +73,11 @@ public class CrackXor extends Crack {
 		double score = 0;
 		String letters = lettres.toLowerCase();
 		for(int i =0; i < letters.length();i ++) {
-			score = score + ToolsCrack.getScoreLetterEnglish(letters.charAt(i));
+			if(this.getLanguage() == 1) {
+				score = score + ToolsCrack.getScoreLetterEnglish(letters.charAt(i));
+			}else {
+				score = score + ToolsCrack.getScoreLetterFrench(letters.charAt(i));
+			}
 		}
 		return score;
 	}
@@ -112,9 +141,8 @@ public class CrackXor extends Crack {
 		return null;
 	}
 	
-	private int[] guessTheKey() {
+	private int[] guessTheKeySize() {
 		int[] keysGuessing = new int[5];
-
 		ArrayList<KeySizeHammingDistance> keys = new ArrayList<KeySizeHammingDistance>();
 		for(int i = KEYSIZE_MIN; i <= KEYSIZE_MAX; i++) {
 			ArrayList<Block> blocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), i);
@@ -135,15 +163,18 @@ public class CrackXor extends Crack {
 			keys.add(new KeySizeHammingDistance(i, distanceAverage));			
 		}
 	   Collections.sort(keys);
-	   
-	   for(int i = 0; i < 4; i++){
+	   for(int i = 0; i < 5; i++){
 		   keysGuessing[i] = keys.get(i).getKeySize();
 	   }
-	   
-	   for(int i = 0; i < keys.size(); i++) {
-		   System.out.println(keys.get(i));
-	   }
 		return keysGuessing;
+	}
+
+	public int[] getFiveFirstIntKeys() {
+		return fiveFirstIntKeys;
+	}
+
+	public void setFiveFirstIntKeys(int[] fiveFirstIntKeys) {
+		this.fiveFirstIntKeys = fiveFirstIntKeys;
 	}
 }
 

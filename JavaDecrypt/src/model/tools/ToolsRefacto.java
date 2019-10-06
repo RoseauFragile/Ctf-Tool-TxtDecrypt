@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class ToolsRefacto {
 	
@@ -91,5 +92,19 @@ public class ToolsRefacto {
             System.err.format("IOException: %s%n", e);
         }
         return sb.toString();
+	}
+	
+	public static boolean isBase64(String stringBase64){
+	        String regex =
+	               "([A-Za-z0-9+/]{4})*"+
+	               "([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)";
+
+	        Pattern patron = Pattern.compile(regex);
+
+	        if (!patron.matcher(stringBase64).matches()) {
+	            return false;
+	        } else {
+	            return true;
+	        }
 	}
 }

@@ -5,7 +5,7 @@ import model.ModelFacade;
 import view.ViewFacade;
 
 public class ControllerFacade {
-	private ControllerFrame controllerFrame;
+	private ControllerXor controllerXor;
 	private ControllerMenu controllerMenu;
 	private ModelFacade modelFacade;
 	private ViewFacade viewFacade;
@@ -22,17 +22,17 @@ public class ControllerFacade {
 	}
 	
 	public void setXorMenu() {
-		this.modelFacade.setModel(new Model("C:\\Users\\Benjamin\\Desktop\\Souille\\FichierADecrypter\\fichier003crypt.txt",""));
+		this.modelFacade.setModel(new Model());
 		this.getViewFacade().setXorView();
-		this.setControllerFrame(new ControllerFrame(this.getModelFacade().getModel(), this.getViewFacade().getXorView()));
-		this.getControllerFrame().initController();
+		this.setControllerXor(new ControllerXor(this.getModelFacade().getModel(), this.getViewFacade().getXorView()));
+		this.getControllerXor().initController();
 	}
 	
-	public ControllerFrame getControllerFrame() {
-		return controllerFrame;
+	public ControllerXor getControllerXor() {
+		return controllerXor;
 	}
-	public void setControllerFrame(ControllerFrame controllerFrame) {
-		this.controllerFrame = controllerFrame;
+	public void setControllerXor(ControllerXor controllerXor) {
+		this.controllerXor = controllerXor;
 	}
 	public ControllerMenu getControllerMenu() {
 		return controllerMenu;

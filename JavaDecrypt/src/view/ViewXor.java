@@ -2,12 +2,15 @@ package view;
 
 import java.awt.BorderLayout;
 import java.io.File;
+
+import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JProgressBar;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class ViewXor{
@@ -19,6 +22,8 @@ public class ViewXor{
 	 private JButton printDecrypted;
 	 private JButton chooseFile;
 	 private JButton saveDecrypted;
+	 private JRadioButton french;
+	 private JRadioButton english;
 	 private static int WIDTH = 1000;
 	 private static int HEIGHT = 700;
 	 private static String TITLE = "CRACK XOR VIGENERE";
@@ -40,10 +45,15 @@ public class ViewXor{
 		  progressBar = new JProgressBar(0, 100);
 		  progressBar.setValue(0);
 		  progressBar.setStringPainted(true);
+		  this.setFrench(new JRadioButton("French"));
+		  this.setEnglish(new JRadioButton("English"));
+		  
+		  ButtonGroup group = new ButtonGroup();
+		  group.add(english);
+		  group.add(french);
+		  english.setSelected(true);
 		  
 		  BackgroundPanel back = new BackgroundPanel("tsoi.jpg");
-
-	      
 	      
 		  frame = new JFrame(title);
 		  frame.getContentPane().setLayout(new BorderLayout());
@@ -59,13 +69,15 @@ public class ViewXor{
 		  layout.setAutoCreateGaps(true);
 		  layout.setAutoCreateContainerGaps(true);
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile).addComponent(decryptButton))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile).addComponent(decryptButton).addComponent(english).addComponent(french))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(progressBar))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(saveDecrypted)));
 		  layout.setVerticalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(printDecrypted))
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(chooseFile).addComponent(progressBar).addComponent(saveDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(decryptButton)));		  
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(decryptButton))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(english))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(french)));		  
 		  back.setLayout(layout);
 		  progressBar.setIndeterminate(true);
 	 }
@@ -159,5 +171,21 @@ public class ViewXor{
 		File file = chooser.getSelectedFile();
 		String fullPath = file.getAbsolutePath()+".txt";
 		return fullPath;
+	}
+
+	public JRadioButton getFrench() {
+		return french;
+	}
+
+	public void setFrench(JRadioButton french) {
+		this.french = french;
+	}
+
+	public JRadioButton getEnglish() {
+		return english;
+	}
+
+	public void setEnglish(JRadioButton english) {
+		this.english = english;
 	}
 }

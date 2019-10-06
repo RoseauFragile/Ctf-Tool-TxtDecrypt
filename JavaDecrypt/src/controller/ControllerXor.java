@@ -8,10 +8,11 @@ import model.Model;
 import model.tools.ToolsRefacto;
 import view.ViewXor;
 
-public class ControllerFrame {
+public class ControllerXor {
 	private Model model;
 	private ViewXor view;
-	public ControllerFrame(Model m, ViewXor v) {
+	
+	public ControllerXor(Model m, ViewXor v) {
 		model = m;
 		view = v;
 	}
@@ -40,8 +41,12 @@ public class ControllerFrame {
 	}
 
 	private void decryptCypher() throws IOException {
-		model.setPath(view.getPath().getText());
-		model.setCrack();
+		if(view.getEnglish().isSelected()) {
+			model.setLanguage(1);
+		}else {
+			model.setLanguage(2);
+		}
+		model.setCrack(view.getPath().getText());
 		view.getProgressBar().setValue(100);
 		view.getProgressBar().setIndeterminate(false);
 	}
