@@ -11,7 +11,6 @@ import model.tools.ToolsRefacto;
 
 public class Model {
 	private String path;
- 	//private String keyLength;
  	private CrackXor crackXor;
  	private String cypherText;
  	private String clearText;

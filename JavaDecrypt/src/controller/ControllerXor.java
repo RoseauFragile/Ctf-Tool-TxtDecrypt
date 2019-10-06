@@ -49,6 +49,7 @@ public class ControllerXor {
 		model.setCrack(view.getPath().getText());
 		view.getProgressBar().setValue(100);
 		view.getProgressBar().setIndeterminate(false);
+		view.setPossiblesKeys(model.getCrackXor().getFiveFirstkeys());
 	}
 	
 	private void printDecrypted() {
@@ -62,6 +63,6 @@ public class ControllerXor {
 	}
 
 	public void showFrame() {
-		this.view.getFrame().setVisible(true);
+		this.view.setVisible(true);
 	}
 }

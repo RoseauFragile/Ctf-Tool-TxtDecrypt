@@ -1,21 +1,29 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.io.File;
 
+import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
 import javax.swing.GroupLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
-public class ViewXor{
+public class ViewXor extends JFrame{
 
-	 private JFrame frame;
+	 /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	 private JLabel pathLabel;
 	 private JTextField path;
 	 private JButton decryptButton;
@@ -29,67 +37,67 @@ public class ViewXor{
 	 private static String TITLE = "CRACK XOR VIGENERE";
 	 private JFileChooser chooser;
 	 private JProgressBar progressBar; 
+	 private JLabel layout;
 	 
 	 public ViewXor() {
-		 this.initView(WIDTH, HEIGHT, TITLE);
+		 super(TITLE);
+		 this.setSize(WIDTH, HEIGHT);
+		 this.setLocationRelativeTo(null);
+		 this.setResizable(true);
+		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 this.setVisible(true);
+		 this.setLayout(new BorderLayout());
+		 this.layout = new JLabel(new ImageIcon("Tsoi.jpg"));
+		 this.add(this.layout);
+		 this.layout.setLayout(new FlowLayout());
+		 this.initView();
 	 }
 	 
-	 private void initView(int width, int height,String title) {
-	      
-		  pathLabel = new JLabel("Path :");
-		  path = new JTextField();
-		  decryptButton = new JButton("Decrypt");
-		  printDecrypted = new JButton("Show cypherDecrypted");
-		  chooseFile = new JButton("Choose File");
-		  saveDecrypted = new JButton("Save Decrypted");
+	 private void initView() {
+	     
+		  JPanel test = new JPanel();
+		  test.setBorder(BorderFactory.createTitledBorder("Choose option"));
 		  progressBar = new JProgressBar(0, 100);
 		  progressBar.setValue(0);
 		  progressBar.setStringPainted(true);
+		  progressBar.setIndeterminate(true);
+		  printDecrypted = new JButton("Show cypherDecrypted");
+		  saveDecrypted = new JButton("Save Decrypted");
+		  test.add(progressBar);
+		  test.add(printDecrypted);
+		  test.add(saveDecrypted);
+		  
+		  JPanel topPan = new JPanel();
+		  topPan.setBorder(BorderFactory.createTitledBorder("Choose file"));
+		  pathLabel = new JLabel("Path :");
+		  path = new JTextField();
+		  chooseFile = new JButton("Choose File");
+		  decryptButton = new JButton("Decrypt");
+		  topPan.add(pathLabel);
+		  topPan.add(path);
+		  topPan.add(chooseFile);
+		  topPan.add(decryptButton);
+		  
+		  JPanel languagePan = new JPanel();
+		  languagePan.setBorder(BorderFactory.createTitledBorder("Choose a language"));
+		  ButtonGroup group = new ButtonGroup();
 		  this.setFrench(new JRadioButton("French"));
 		  this.setEnglish(new JRadioButton("English"));
-		  
-		  ButtonGroup group = new ButtonGroup();
 		  group.add(english);
 		  group.add(french);
 		  english.setSelected(true);
+		  languagePan.add(english);
+		  languagePan.add(french);
 		  
-		  BackgroundPanel back = new BackgroundPanel("tsoi.jpg");
-	      
-		  frame = new JFrame(title);
-		  frame.getContentPane().setLayout(new BorderLayout());
-		  frame.getContentPane().setLayout(new BorderLayout());
-		  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  frame.setSize(width, height);
-		  frame.setLocationRelativeTo(null);
-		  frame.setVisible(true);
-		  frame.setContentPane(back);
+		  JPanel control = new JPanel();
+		  control.add(new JButton("Back"));
 		  
-		  
-		  GroupLayout layout = new GroupLayout(frame.getContentPane());
-		  layout.setAutoCreateGaps(true);
-		  layout.setAutoCreateContainerGaps(true);
-		  layout.setHorizontalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(pathLabel).addComponent(chooseFile).addComponent(decryptButton).addComponent(english).addComponent(french))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(path).addComponent(progressBar))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(printDecrypted).addComponent(saveDecrypted)));
-		  layout.setVerticalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(pathLabel).addComponent(path).addComponent(printDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(chooseFile).addComponent(progressBar).addComponent(saveDecrypted))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(decryptButton))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(english))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(french)));		  
-		  back.setLayout(layout);
-		  progressBar.setIndeterminate(true);
+		  this.layout.add(topPan, BorderLayout.NORTH);
+		  this.layout.add(languagePan, BorderLayout.WEST);
+		  this.layout.add(test, BorderLayout.CENTER);
+		  this.layout.add(control, BorderLayout.SOUTH);
 	 }
-	 
-	 public JFrame getFrame() {
-	  return frame;
-	 }
-	 
-	 public void setFrame(JFrame frame) {
-	  this.frame = frame;
-	 }
-	 
+	 	 
 	 public JLabel getPathLabel() {
 	  return pathLabel;
 	 }
@@ -187,5 +195,10 @@ public class ViewXor{
 
 	public void setEnglish(JRadioButton english) {
 		this.english = english;
+	}
+
+	public void setPossiblesKeys(String[] fiveFirstkeys) {
+		// TODO Auto-generated method stub
+		
 	}
 }

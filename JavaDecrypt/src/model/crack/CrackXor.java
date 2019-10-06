@@ -30,7 +30,6 @@ public class CrackXor extends Crack {
 		this.setFiveFirstkeys();
 		
 		for(int i = 0 ; i< 5;i++) {
-			System.out.println("Test + " +this.getFiveFirstIntKeys()[i]);
 			this.keySizeGuessed = this.getFiveFirstIntKeys()[i];
 			try {
 				this.refactoreCypherText();
