@@ -1,7 +1,11 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -46,10 +50,10 @@ public class ViewXor extends JFrame{
 		 this.setResizable(true);
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 this.setVisible(true);
-		 this.setLayout(new BorderLayout());
+		// this.setLayout(new GridBagLayout());
 		 this.layout = new JLabel(new ImageIcon("Tsoi.jpg"));
 		 this.add(this.layout);
-		 this.layout.setLayout(new FlowLayout());
+		 this.layout.setLayout(new GridBagLayout());
 		 this.initView();
 	 }
 	 
@@ -71,6 +75,7 @@ public class ViewXor extends JFrame{
 		  topPan.setBorder(BorderFactory.createTitledBorder("Choose file"));
 		  pathLabel = new JLabel("Path :");
 		  path = new JTextField();
+		  path.setPreferredSize(new Dimension(200,24));
 		  chooseFile = new JButton("Choose File");
 		  decryptButton = new JButton("Decrypt");
 		  topPan.add(pathLabel);
@@ -92,10 +97,32 @@ public class ViewXor extends JFrame{
 		  JPanel control = new JPanel();
 		  control.add(new JButton("Back"));
 		  
-		  this.layout.add(topPan, BorderLayout.NORTH);
-		  this.layout.add(languagePan, BorderLayout.WEST);
-		  this.layout.add(test, BorderLayout.CENTER);
-		  this.layout.add(control, BorderLayout.SOUTH);
+		  GridBagConstraints c = new GridBagConstraints();
+		  
+		  c.fill = GridBagConstraints.NONE;
+		  c.gridx = 0;
+		  c.gridy = 0;
+		  c.weightx = 0.5;
+		  c.anchor = GridBagConstraints.FIRST_LINE_START;
+		  this.layout.add(topPan, c);
+		  
+		  c.fill = GridBagConstraints.NONE;
+		  c.ipady = 0; 
+		  c.insets = new Insets(10,0,0,0);
+		  c.gridx = 0;
+		  c.gridy = 1;
+		  c.weightx = 0.5;
+		  this.layout.add(languagePan, c);	  
+		  
+		  c.fill = GridBagConstraints.NONE;
+		  c.ipady = 0;       //reset to default
+		  c.weighty = 1.0;   //request any extra vertical space
+		  c.anchor = GridBagConstraints.PAGE_END; 
+		  c.insets = new Insets(10,0,0,0);  
+		  c.gridx = 1;       
+		  c.gridy = 2;       
+		  this.layout.add(test, c);
+		  
 	 }
 	 	 
 	 public JLabel getPathLabel() {
