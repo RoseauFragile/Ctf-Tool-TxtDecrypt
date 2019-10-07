@@ -6,13 +6,16 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import model.Model;
 import model.tools.ToolsRefacto;
+import view.ProgressFrame;
 import view.ViewXor;
 
 public class ControllerXor {
 	private Model model;
 	private ViewXor view;
+	private ControllerFacade controllerFacade;
 	
-	public ControllerXor(Model m, ViewXor v) {
+	public ControllerXor(ControllerFacade controllerFacade, Model m, ViewXor v) {
+		this.controllerFacade = controllerFacade;
 		model = m;
 		view = v;
 	}
@@ -28,8 +31,21 @@ public class ControllerXor {
 		view.getPrintDecrypted().addActionListener(e -> printDecrypted());
 		view.getSaveDecrypted().addActionListener(e -> saveDecrypted());
 		view.getChooseFile().addActionListener(e -> chooseFile());
+		view.getOpenFileMenu().addActionListener(e -> chooseFile());
+		view.getExitMenu().addActionListener(e -> exit());
+		view.getBack().addActionListener(e -> backToMenu());
 	}
 	
+	private void backToMenu() {
+		view.setVisible(false);
+		view.dispose();
+	    this.controllerFacade.getViewFacade().setMenuView();
+	}
+
+	private void exit() {
+		System.exit(0);
+	}
+
 	private void chooseFile() {
 		String fullPath = this.view.setChooser();
 		this.view.getPath().setText(fullPath);
@@ -41,15 +57,18 @@ public class ControllerXor {
 	}
 
 	private void decryptCypher() throws IOException {
+		@SuppressWarnings("unused")
+		ProgressFrame progress = new ProgressFrame(this);
 		if(view.getEnglish().isSelected()) {
 			model.setLanguage(1);
 		}else {
 			model.setLanguage(2);
 		}
 		model.setCrack(view.getPath().getText());
-		view.getProgressBar().setValue(100);
-		view.getProgressBar().setIndeterminate(false);
-		view.setPossiblesKeys(model.getCrackXor().getFiveFirstkeys());
+	}
+	
+	public void showKeys() {
+		JOptionPane.showMessageDialog(null, model.getCrackXor().getFiveFirstkeys(), "Probable keys", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void printDecrypted() {

@@ -5,15 +5,15 @@ public class ViewFacade {
 	private MenuView menuView;
 	
 	public ViewFacade() {
-		this.setMenuView(new MenuView());
+		this.setMenuView();
 	}
 
 	public MenuView getMenuView() {
 		return menuView;
 	}
 
-	public void setMenuView(MenuView menuView) {
-		this.menuView = menuView;
+	public void setMenuView() {
+		this.menuView = new MenuView();
 	}
 
 	public ViewXor getXorView() {
@@ -22,7 +22,7 @@ public class ViewFacade {
 
 	public void setXorView() {
 		this.xorView = new ViewXor();
-		this.getMenuView().getFrame().setVisible(false);
+		this.getMenuView().dispose();
 	}
 	
 	

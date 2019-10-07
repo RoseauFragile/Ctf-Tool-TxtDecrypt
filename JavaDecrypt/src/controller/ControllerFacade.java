@@ -24,7 +24,7 @@ public class ControllerFacade {
 	public void setXorMenu() {
 		this.modelFacade.setModel(new Model());
 		this.getViewFacade().setXorView();
-		this.setControllerXor(new ControllerXor(this.getModelFacade().getModel(), this.getViewFacade().getXorView()));
+		this.setControllerXor(new ControllerXor(this,this.getModelFacade().getModel(), this.getViewFacade().getXorView()));
 		this.getControllerXor().initController();
 	}
 	

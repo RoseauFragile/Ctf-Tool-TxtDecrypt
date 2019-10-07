@@ -6,32 +6,33 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-public class MenuView{
+public class MenuView extends JFrame {
 
-	 private static String TITLE = "Menu";
+	private static final long serialVersionUID = 1L;
+	private static String TITLE = "Menu";
 	 private static int WIDTH = 500;
 	 private static int HEIGHT = 100;
-	 private JFrame frame;
 	 private JButton xorButton;
 	 private JLabel choiceLabel;
 
 	 public MenuView() {
-		 this.initView(WIDTH, HEIGHT, TITLE);
+		 super(TITLE);
+		 this.getContentPane().setLayout(new BorderLayout());
+		 this.getContentPane().setLayout(new BorderLayout());
+		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		 this.setSize(WIDTH, HEIGHT);
+		 this.setLocationRelativeTo(null);
+		 this.setVisible(true);
+		 this.initView();
 	 }
 	 
-	 private void initView(int width, int height,String title) {
-		  frame = new JFrame(title);
-		  frame.getContentPane().setLayout(new BorderLayout());
-		  frame.getContentPane().setLayout(new BorderLayout());
-		  frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		  frame.setSize(width, height);
-		  frame.setLocationRelativeTo(null);
-		  frame.setVisible(true);
+	 private void initView() {
+	
 		  
 		  this.setChoiceLabel(new JLabel("Choose a crack :"));
 		  xorButton = new JButton("XOR");
 		  
-		  GroupLayout layout = new GroupLayout(frame.getContentPane());
+		  GroupLayout layout = new GroupLayout(this.getContentPane());
 		  layout.setAutoCreateGaps(true);
 		  layout.setAutoCreateContainerGaps(true);
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
@@ -39,15 +40,7 @@ public class MenuView{
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(xorButton)));
 		  layout.setVerticalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(choiceLabel).addComponent(xorButton)));
-		  frame.getContentPane().setLayout(layout);
-	 }
-	 
-	 public JFrame getFrame() {
-	  return frame;
-	 }
-	 
-	 public void setFrame(JFrame frame) {
-	  this.frame = frame;
+		  this.getContentPane().setLayout(layout);
 	 }
 	
 	public JButton getXorButton() {

@@ -1,33 +1,28 @@
 package view;
 
-import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.io.File;
-
 import javax.swing.BorderFactory;
 import javax.swing.ButtonGroup;
-import javax.swing.GroupLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 
 public class ViewXor extends JFrame{
 
-	 /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-
+	 private static final long serialVersionUID = 1L;
 	 private JLabel pathLabel;
 	 private JTextField path;
 	 private JButton decryptButton;
@@ -40,9 +35,14 @@ public class ViewXor extends JFrame{
 	 private static int HEIGHT = 700;
 	 private static String TITLE = "CRACK XOR VIGENERE";
 	 private JFileChooser chooser;
-	 private JProgressBar progressBar; 
 	 private JLabel layout;
-	 
+	 private JMenuBar menuBar;
+     private JMenu fileMenu;
+     private JMenuItem exitMenu;
+     private JMenuItem openFileMenu;
+     private JMenuItem back;
+     private static Color OPACITY = new Color(0.0f,0.0f,0.0f,0.2f);
+     
 	 public ViewXor() {
 		 super(TITLE);
 		 this.setSize(WIDTH, HEIGHT);
@@ -50,7 +50,6 @@ public class ViewXor extends JFrame{
 		 this.setResizable(true);
 		 this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		 this.setVisible(true);
-		// this.setLayout(new GridBagLayout());
 		 this.layout = new JLabel(new ImageIcon("Tsoi.jpg"));
 		 this.add(this.layout);
 		 this.layout.setLayout(new GridBagLayout());
@@ -58,18 +57,23 @@ public class ViewXor extends JFrame{
 	 }
 	 
 	 private void initView() {
-	     
-		  JPanel test = new JPanel();
-		  test.setBorder(BorderFactory.createTitledBorder("Choose option"));
-		  progressBar = new JProgressBar(0, 100);
-		  progressBar.setValue(0);
-		  progressBar.setStringPainted(true);
-		  progressBar.setIndeterminate(true);
+	      this.menuBar = new JMenuBar();
+	      this.setFileMenu(new JMenu("File"));
+	      this.setExitMenu(new JMenuItem("Exit"));
+	      this.setOpenFileMenu(new JMenuItem("Open"));
+	      this.setBack(new JMenuItem("Back"));
+	      this.fileMenu.add(openFileMenu);
+	      this.menuBar.add(fileMenu);
+	      this.menuBar.add(exitMenu);
+	      
+		 
+		  JPanel option = new JPanel();
+		  option.setBorder(BorderFactory.createTitledBorder("Choose option"));
 		  printDecrypted = new JButton("Show cypherDecrypted");
 		  saveDecrypted = new JButton("Save Decrypted");
-		  test.add(progressBar);
-		  test.add(printDecrypted);
-		  test.add(saveDecrypted);
+		  option.add(printDecrypted);
+		  option.add(saveDecrypted);
+		  option.setBackground(OPACITY);
 		  
 		  JPanel topPan = new JPanel();
 		  topPan.setBorder(BorderFactory.createTitledBorder("Choose file"));
@@ -82,6 +86,7 @@ public class ViewXor extends JFrame{
 		  topPan.add(path);
 		  topPan.add(chooseFile);
 		  topPan.add(decryptButton);
+		  topPan.setBackground(OPACITY);
 		  
 		  JPanel languagePan = new JPanel();
 		  languagePan.setBorder(BorderFactory.createTitledBorder("Choose a language"));
@@ -93,6 +98,7 @@ public class ViewXor extends JFrame{
 		  english.setSelected(true);
 		  languagePan.add(english);
 		  languagePan.add(french);
+		  languagePan.setBackground(OPACITY);
 		  
 		  JPanel control = new JPanel();
 		  control.add(new JButton("Back"));
@@ -115,13 +121,15 @@ public class ViewXor extends JFrame{
 		  this.layout.add(languagePan, c);	  
 		  
 		  c.fill = GridBagConstraints.NONE;
-		  c.ipady = 0;       //reset to default
-		  c.weighty = 1.0;   //request any extra vertical space
+		  c.ipady = 0;       
+		  c.weighty = 1.0;   
 		  c.anchor = GridBagConstraints.PAGE_END; 
 		  c.insets = new Insets(10,0,0,0);  
 		  c.gridx = 1;       
 		  c.gridy = 2;       
-		  this.layout.add(test, c);
+		  this.layout.add(option, c);
+		  
+		  this.setJMenuBar(this.menuBar);
 		  
 	 }
 	 	 
@@ -176,14 +184,6 @@ public class ViewXor extends JFrame{
 	public JFileChooser getChooser() {
 		return chooser;
 	}
-	
-	public JProgressBar getProgressBar() {
-		return progressBar;
-	}
-
-	public void setProgressBar(JProgressBar progressBar) {
-		this.progressBar = progressBar;
-	}
 
 	public String setChooser() {
 		this.chooser = new JFileChooser(); 
@@ -224,8 +224,35 @@ public class ViewXor extends JFrame{
 		this.english = english;
 	}
 
-	public void setPossiblesKeys(String[] fiveFirstkeys) {
-		// TODO Auto-generated method stub
-		
+	public JMenu getFileMenu() {
+		return fileMenu;
+	}
+
+	public void setFileMenu(JMenu fileMenu) {
+		this.fileMenu = fileMenu;
+	}
+
+	public JMenuItem getExitMenu() {
+		return exitMenu;
+	}
+
+	public void setExitMenu(JMenuItem exitMenu) {
+		this.exitMenu = exitMenu;
+	}
+
+	public JMenuItem getOpenFileMenu() {
+		return openFileMenu;
+	}
+
+	public void setOpenFileMenu(JMenuItem openFileMenu) {
+		this.openFileMenu = openFileMenu;
+	}
+
+	public JMenuItem getBack() {
+		return back;
+	}
+
+	public void setBack(JMenuItem back) {
+		this.back = back;
 	}
 }
