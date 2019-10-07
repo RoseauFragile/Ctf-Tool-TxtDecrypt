@@ -3,9 +3,8 @@ package view;
 import java.awt.Color;
 
 
-public class ViewCesar extends ViewFrame{
+public class ViewCesar{
 
-	 private static final long serialVersionUID = 1L;
 	 private static String IMAGE = "roman.jpg";
      private static Color OPACITY = new Color(0.0f,0.0f,0.0f,0.2f);
      private ViewFrame viewFrame;

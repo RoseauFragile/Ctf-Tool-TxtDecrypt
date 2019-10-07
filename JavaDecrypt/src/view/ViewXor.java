@@ -3,7 +3,6 @@ package view;
 import java.awt.Color;
 
 public class ViewXor{
-	 private static final long serialVersionUID = 1L;
 	 private static String IMAGE = "tsoi.jpg";
      private static Color OPACITY = new Color(0.0f,0.0f,0.0f,0.2f);
      private ViewFrame viewFrame;

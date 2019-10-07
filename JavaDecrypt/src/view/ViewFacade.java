@@ -16,6 +16,10 @@ public class ViewFacade {
 	public void setMenuView() {
 		this.menuView = new ViewMain();
 	}
+	
+	public void backToMenuView() {
+		this.menuView.initMenuView();
+	}
 
 	public ViewXor getXorView() {
 		return xorView;

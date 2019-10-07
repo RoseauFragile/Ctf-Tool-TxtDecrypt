@@ -33,14 +33,6 @@ public class ControllerCesar {
 		view.getChooseFile().addActionListener(e -> chooseFile());
 		view.getOpenFileMenu().addActionListener(e -> chooseFile());
 		view.getExitMenu().addActionListener(e -> exit());
-		view.getBack().addActionListener(e -> backToMenu());
-	}
-	
-	private void backToMenu() {
-		view.setVisible(false);
-		view.dispose();
-		this.controllerFacade.getViewFacade().setMenuView();
-	    this.controllerFacade.initMenuView();
 	}
 
 	private void exit() {

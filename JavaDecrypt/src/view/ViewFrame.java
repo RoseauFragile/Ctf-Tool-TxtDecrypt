@@ -2,9 +2,12 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.GraphicsDevice;
+import java.awt.GraphicsEnvironment;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.io.File;
 
 import javax.swing.BorderFactory;
@@ -50,7 +53,13 @@ public abstract class ViewFrame extends JFrame{
 	 public ViewFrame() {
 		super(TITLE); 
 		this.setSize(WIDTH, HEIGHT);
-		this.setLocationRelativeTo(null);
+		
+	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+	    GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
+	    Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
+	    int x = ((int) rect.getMaxX() - this.getWidth())/2;
+	    int y = ((int) rect.getMaxY() - this.getHeight())/8;
+	    this.setLocation(x, y);
 		this.setResizable(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.initMenu();
@@ -74,6 +83,7 @@ public abstract class ViewFrame extends JFrame{
 	 	}
 	 
 	 public void initView(String pathToBackground, Color opacity) {
+		 this.setSize(WIDTH, HEIGHT);
 		if(this.getPrincipalLayout() != null) {
 			this.getPrincipalLayout().removeAll();
 			this.getContentPane().removeAll();

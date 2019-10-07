@@ -13,12 +13,18 @@ public class ViewMain extends ViewFrame{
          
 	public ViewMain() {
 		super();
-		this.initMenuView(IMAGE);
+		System.out.println("NEW MAIN VIEW");
+		this.initMenuView();
 		this.setVisible(true);
 	}
 
-	private void initMenuView(String image) {
-		this.setPathToBackground(image);
+	public void initMenuView() {
+		if(this.getPrincipalLayout() != null) {
+			this.getPrincipalLayout().removeAll();
+			this.getContentPane().removeAll();
+		}
+		this.setSize(1000, 1000);
+		this.setPathToBackground(IMAGE);
 		JLabel label = new JLabel(new ImageIcon(this.getPathToBackground()));
 		label.setBackground(Color.black);
 		label.setOpaque(true);

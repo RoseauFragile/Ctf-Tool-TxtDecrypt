@@ -16,10 +16,15 @@ public class ControllerMenu {
 		this.getMenuView().getXorButton().addActionListener(e -> showXorMenu());
 		this.getMenuView().getCesarButton().addActionListener(e -> showCesarMenu());
 		this.getMenuView().getExitMenu().addActionListener(e -> exit());
+		this.getMenuView().getBack().addActionListener(e -> backToMenu());
 	}
 
 	private void exit() {
 		System.exit(0);
+	}
+	
+	private void backToMenu() {
+	    this.getControllerFacade().getViewFacade().getMenuView().initMenuView();
 	}
 
 	private void showCesarMenu() {
