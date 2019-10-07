@@ -6,8 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
-
-import controller.ControllerCesar;
+import controller.ControllerCaesar;
 import controller.ControllerXor;
 
 public class ProgressFrame extends JFrame{
@@ -18,7 +17,7 @@ public class ProgressFrame extends JFrame{
   private JButton launch ;
   private JButton exit ;
   private ControllerXor controllerXor;
-  private ControllerCesar controllerCesar;
+  private ControllerCaesar controllerCaesar;
    
   public ProgressFrame(ControllerXor controllerXor){
 	this.setControllerXor(controllerXor);
@@ -54,8 +53,8 @@ public class ProgressFrame extends JFrame{
     this.setVisible(true);      
   }
   
-  public ProgressFrame(ControllerCesar controllerCesar) {
-		this.setControllerCesar(controllerCesar);
+  public ProgressFrame(ControllerCaesar controllerCaesar) {
+		this.setControllerCaesar(controllerCaesar);
 	    this.setSize(500, 150);
 	    this.setTitle("Cracking");
 	    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -80,13 +79,20 @@ public class ProgressFrame extends JFrame{
 	    exit = new JButton("Exit");
 	    exit.addActionListener(new ActionListener(){
 	      public void actionPerformed(ActionEvent event){
-	    	  exit();
+	    	  exitCaesar();
 	      }
 	    }); 
 	    this.getContentPane().add(launch, BorderLayout.PAGE_START);
 	    this.getContentPane().add(exit, BorderLayout.PAGE_END);
 	    this.setVisible(true);  
 }
+  
+  public void exitCaesar() {
+	  this.dispose();
+	  if(this.bar.getValue() == 500) {
+		  this.controllerCaesar.showKeys();
+	  }
+  }
 
 public void exit() {
 	  this.dispose();
@@ -103,12 +109,12 @@ public void setControllerXor(ControllerXor controllerXor) {
 	this.controllerXor = controllerXor;
 }
 
-public ControllerCesar getControllerCesar() {
-	return controllerCesar;
+public ControllerCaesar getControllerCaesar() {
+	return controllerCaesar;
 }
 
-public void setControllerCesar(ControllerCesar controllerCesar) {
-	this.controllerCesar = controllerCesar;
+public void setControllerCaesar(ControllerCaesar controllerCaesar) {
+	this.controllerCaesar = controllerCaesar;
 }
 
 class Traitement implements Runnable{   

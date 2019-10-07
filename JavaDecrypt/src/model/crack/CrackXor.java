@@ -59,7 +59,6 @@ public class CrackXor extends Crack {
 	}
 	
 	private void refactoreCypherText() throws UnsupportedEncodingException {
-        this.setInput(this.getCypherText().getBytes("UTF-8"));
         this.textBlocks = ToolsRefacto.parseCypherTextToBlock(this.getCypherText(), this.keySizeGuessed);
         this.transposedBlocks = ToolsRefacto.transposeAllBlocksByIndex(this.textBlocks, this.keySizeGuessed);
 	}

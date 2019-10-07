@@ -64,7 +64,7 @@ public class ControllerXor {
 		}else {
 			model.setLanguage(2);
 		}
-		model.setCrack(view.getPath().getText());
+		model.setCrackXor(view.getPath().getText());
 	}
 	
 	public void showKeys() {

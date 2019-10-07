@@ -5,7 +5,6 @@ import model.Model;
 
 public abstract class Crack {
 	private int KEY_SIZE = 12;
-	private byte [] input;
 	private String cypherText;
 	private String Key;
 	private int language;
@@ -22,14 +21,6 @@ public abstract class Crack {
 		}else {
 			this.setCypherText(cyphertext);
 		}
-	}
-
-	public byte[] getInput() {
-		return input;
-	}
-
-	public void setInput(byte[] input) {
-		this.input = input;
 	}
 
 	public String getCypherText() {

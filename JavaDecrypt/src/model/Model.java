@@ -8,12 +8,14 @@ import java.util.List;
 
 import javax.swing.JOptionPane;
 
+import model.crack.CrackCaesar;
 import model.crack.CrackXor;
 import model.tools.ToolsRefacto;
 
 public class Model {
 	private String path;
  	private CrackXor crackXor;
+ 	private CrackCaesar crackCaesar;
  	private String cypherText;
  	private String clearText;
  	private String key;
@@ -23,17 +25,48 @@ public class Model {
  	public Model(){
 
  	}
-
-	public void setCrack(String path) throws IOException{
+ 	
+ 	private void initCrack(String path) throws IOException {
 		this.setPath(path);
 		this.setCypherText();
 		this.setBase64(ToolsRefacto.isBase64(this.getCypherText()));
+ 	}
+ 	
+	public void setCrackCaesar(String path) throws IOException{
+		this.initCrack(path);
+		this.setCrackCaesar(new CrackCaesar(this.getCypherText(),this.getLanguage(),this));
+	}
+
+	public void setCrackXor(String path) throws IOException{
+		this.initCrack(path);
 		this.setCrackXor(new CrackXor(this.getCypherText(),this.getLanguage(),this));
 		if(this.key!= null) {
 			this.setClearText(this.getCrackXor().decode_operation(this.getCypherText(), this.key.getBytes()));
 		}else {
 			this.setClearText(this.getCrackXor().decode_operation(this.getCypherText(), this.crackXor.getKey().getBytes()));	
 		}
+	}
+	
+	private void setCypherText() throws IOException {
+        String content ="";
+        try {
+    		String fileName = this.getPath();
+    		List<String> lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
+    		StringBuilder sb = new StringBuilder();
+    		for (int i =0; i < lines.size(); i++) {
+    			sb.append(lines.get(i)); 
+    			}
+    		String fromFile = sb.toString();
+    		content = fromFile;
+        }
+        catch(Exception e) {
+            try{
+            	content = new String(Files.readAllBytes(Paths.get(this.getPath())), StandardCharsets.UTF_8);
+            }catch(Exception f) {
+				JOptionPane.showMessageDialog(null,"Choose a valid file", "File not found", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+		this.setCypherText(content);
 	}
  
  	public String getPath() {
@@ -95,26 +128,12 @@ public class Model {
 	public void setBase64(boolean isBase64) {
 		this.isBase64 = isBase64;
 	}
-	
-	private void setCypherText() throws IOException {
-        String content ="";
-        try {
-    		String fileName = this.getPath();
-    		List<String> lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
-    		StringBuilder sb = new StringBuilder();
-    		for (int i =0; i < lines.size(); i++) {
-    			sb.append(lines.get(i)); 
-    			}
-    		String fromFile = sb.toString();
-    		content = fromFile;
-        }
-        catch(Exception e) {
-            try{
-            	content = new String(Files.readAllBytes(Paths.get(this.getPath())), StandardCharsets.UTF_8);
-            }catch(Exception f) {
-				JOptionPane.showMessageDialog(null,"Choose a valid file", "File not found", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-		this.setCypherText(content);
+
+	public CrackCaesar getCrackCaesar() {
+		return crackCaesar;
+	}
+
+	public void setCrackCaesar(CrackCaesar crackCaesar) {
+		this.crackCaesar = crackCaesar;
 	}
 }

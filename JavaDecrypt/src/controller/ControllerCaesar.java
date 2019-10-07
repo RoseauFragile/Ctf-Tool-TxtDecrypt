@@ -9,12 +9,12 @@ import model.tools.ToolsRefacto;
 import view.ProgressFrame;
 import view.ViewFrame;
 
-public class ControllerCesar {
+public class ControllerCaesar {
 	private Model model;
 	private ViewFrame view;
 	private ControllerFacade controllerFacade;
 	
-	public ControllerCesar(ControllerFacade controllerFacade, Model m, ViewFrame v) {
+	public ControllerCaesar(ControllerFacade controllerFacade, Model m, ViewFrame v) {
 		this.setControllerFacade(controllerFacade);
 		model = m;
 		view = v;
@@ -64,11 +64,11 @@ public class ControllerCesar {
 		}else {
 			model.setLanguage(2);
 		}
-		model.setCrack(view.getPath().getText());
+		model.setCrackCaesar(view.getPath().getText());
 	}
 	
 	public void showKeys() {
-		JOptionPane.showMessageDialog(null, model.getCrackXor().getFiveFirstkeys(), "Probable keys", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, model.getCrackCaesar().getFiveFirstkeys(), "Probable keys", JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void printDecrypted() {

@@ -9,7 +9,7 @@ public class ControllerFacade {
 	private ControllerMenu controllerMenu;
 	private ModelFacade modelFacade;
 	private ViewFacade viewFacade;
-	private ControllerCesar controllerCesar;
+	private ControllerCaesar controllerCaesar;
 	
 	public ControllerFacade(ViewFacade viewFacade, ModelFacade modelFacade) {
 		this.setModelFacade(modelFacade);
@@ -32,8 +32,8 @@ public class ControllerFacade {
 	public void setCesarMenu() {
 		this.modelFacade.setModel(new Model());
 		this.getViewFacade().setCesarView();
-		this.setControllerCesar(new ControllerCesar(this,this.getModelFacade().getModel(), this.getViewFacade().getMenuView()));
-		this.getControllerCesar().initController();
+		this.setControllerCaesar(new ControllerCaesar(this,this.getModelFacade().getModel(), this.getViewFacade().getMenuView()));
+		this.getControllerCaesar().initController();
 	}
 	
 	public ControllerXor getControllerXor() {
@@ -61,11 +61,11 @@ public class ControllerFacade {
 		this.modelFacade = modelFacade;
 	}
 
-	public ControllerCesar getControllerCesar() {
-		return controllerCesar;
+	public ControllerCaesar getControllerCaesar() {
+		return controllerCaesar;
 	}
 
-	public void setControllerCesar(ControllerCesar controllerCesar) {
-		this.controllerCesar = controllerCesar;
+	public void setControllerCaesar(ControllerCaesar controllerCaesar) {
+		this.controllerCaesar = controllerCaesar;
 	}
 }
