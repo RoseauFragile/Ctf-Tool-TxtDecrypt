@@ -5,6 +5,9 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+
+import javax.swing.JOptionPane;
+
 import model.crack.CrackXor;
 import model.tools.ToolsRefacto;
 
@@ -94,7 +97,7 @@ public class Model {
 	}
 	
 	private void setCypherText() throws IOException {
-        String content;
+        String content ="";
         try {
     		String fileName = this.getPath();
     		List<String> lines = Files.readAllLines(Paths.get(fileName), StandardCharsets.UTF_8);
@@ -106,7 +109,11 @@ public class Model {
     		content = fromFile;
         }
         catch(Exception e) {
-            content = new String(Files.readAllBytes(Paths.get(this.getPath())), StandardCharsets.UTF_8);
+            try{
+            	content = new String(Files.readAllBytes(Paths.get(this.getPath())), StandardCharsets.UTF_8);
+            }catch(Exception f) {
+				JOptionPane.showMessageDialog(null,"Choose a valid file", "File not found", JOptionPane.ERROR_MESSAGE);
+            }
         }
 		this.setCypherText(content);
 	}

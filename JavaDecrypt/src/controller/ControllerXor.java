@@ -39,7 +39,8 @@ public class ControllerXor {
 	private void backToMenu() {
 		view.setVisible(false);
 		view.dispose();
-	    this.controllerFacade.getViewFacade().setMenuView();
+		this.controllerFacade.getViewFacade().setMenuView();
+	    this.controllerFacade.initMenuView();
 	}
 
 	private void exit() {
@@ -52,8 +53,12 @@ public class ControllerXor {
 	}
 
 	private void saveDecrypted() {
-		  String fullPath = this.view.setChooserSave();
-		  ToolsRefacto.ecrireUnFichier(fullPath,model.getClearText());
+		  try{
+			  String fullPath = this.view.setChooserSave();
+			  ToolsRefacto.ecrireUnFichier(fullPath,model.getClearText());
+		  }catch(Exception e) {
+				JOptionPane.showMessageDialog(null,"Please enter a valid file name", "File not found", JOptionPane.ERROR_MESSAGE);
+		  }
 	}
 
 	private void decryptCypher() throws IOException {

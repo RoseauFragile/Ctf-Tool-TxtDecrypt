@@ -63,9 +63,9 @@ public class ViewXor extends JFrame{
 	      this.setOpenFileMenu(new JMenuItem("Open"));
 	      this.setBack(new JMenuItem("Back"));
 	      this.fileMenu.add(openFileMenu);
+	      this.fileMenu.add(exitMenu);
 	      this.menuBar.add(fileMenu);
-	      this.menuBar.add(exitMenu);
-	      
+	      this.menuBar.add(back);
 		 
 		  JPanel option = new JPanel();
 		  option.setBorder(BorderFactory.createTitledBorder("Choose option"));

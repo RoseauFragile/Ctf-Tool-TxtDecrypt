@@ -16,7 +16,7 @@ public class ControllerFacade {
 		this.initMenuView();
 	}
 	
-	private void initMenuView() {
+	public void initMenuView() {
 		this.setControllerMenu(new ControllerMenu(this.getViewFacade().getMenuView(),this));
 		this.getControllerMenu().initController();
 	}
