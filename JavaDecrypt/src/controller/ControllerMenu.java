@@ -1,20 +1,25 @@
 package controller;
 
-import view.MenuView;
+import view.ViewFrame;
 
 public class ControllerMenu {
 
-	private MenuView menuView;
+	private ViewFrame menuView;
 	private ControllerFacade controllerFacade;
 	
-	public ControllerMenu(MenuView menuView, ControllerFacade controllerFacade) {
-		this.setMenuView(menuView);
+	public ControllerMenu(ViewFrame viewFrame, ControllerFacade controllerFacade) {
+		this.setMenuView(viewFrame);
 		this.setControllerFacade(controllerFacade);
 	}
 
 	public void initController() {
 		this.getMenuView().getXorButton().addActionListener(e -> showXorMenu());
 		this.getMenuView().getCesarButton().addActionListener(e -> showCesarMenu());
+		this.getMenuView().getExitMenu().addActionListener(e -> exit());
+	}
+
+	private void exit() {
+		System.exit(0);
 	}
 
 	private void showCesarMenu() {
@@ -26,12 +31,12 @@ public class ControllerMenu {
 	}
 	
 
-	public MenuView getMenuView() {
+	public ViewFrame getMenuView() {
 		return menuView;
 	}
 
-	private void setMenuView(MenuView menuView) {
-		this.menuView = menuView;
+	private void setMenuView(ViewFrame viewFrame) {
+		this.menuView = viewFrame;
 	}
 
 	public ControllerFacade getControllerFacade() {

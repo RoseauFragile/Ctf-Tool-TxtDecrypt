@@ -7,14 +7,14 @@ import javax.swing.JTextArea;
 import model.Model;
 import model.tools.ToolsRefacto;
 import view.ProgressFrame;
-import view.ViewXor;
+import view.ViewFrame;
 
 public class ControllerXor {
 	private Model model;
-	private ViewXor view;
+	private ViewFrame view;
 	private ControllerFacade controllerFacade;
 	
-	public ControllerXor(ControllerFacade controllerFacade, Model m, ViewXor v) {
+	public ControllerXor(ControllerFacade controllerFacade, Model m, ViewFrame v) {
 		this.controllerFacade = controllerFacade;
 		model = m;
 		view = v;
@@ -48,8 +48,12 @@ public class ControllerXor {
 	}
 
 	private void chooseFile() {
+		try {
 		String fullPath = this.view.setChooser();
 		this.view.getPath().setText(fullPath);
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"Please enter a valid file name", "File not found", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void saveDecrypted() {

@@ -7,15 +7,14 @@ import javax.swing.JTextArea;
 import model.Model;
 import model.tools.ToolsRefacto;
 import view.ProgressFrame;
-import view.ViewCesar;
-import view.ViewXor;
+import view.ViewFrame;
 
 public class ControllerCesar {
 	private Model model;
-	private ViewCesar view;
+	private ViewFrame view;
 	private ControllerFacade controllerFacade;
 	
-	public ControllerCesar(ControllerFacade controllerFacade, Model m, ViewCesar v) {
+	public ControllerCesar(ControllerFacade controllerFacade, Model m, ViewFrame v) {
 		this.controllerFacade = controllerFacade;
 		model = m;
 		view = v;
@@ -49,8 +48,12 @@ public class ControllerCesar {
 	}
 
 	private void chooseFile() {
+		try {
 		String fullPath = this.view.setChooser();
 		this.view.getPath().setText(fullPath);
+		}catch(Exception e) {
+			JOptionPane.showMessageDialog(null,"Please enter a valid file name", "File not found", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void saveDecrypted() {

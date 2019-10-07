@@ -25,8 +25,15 @@ public class ControllerFacade {
 	public void setXorMenu() {
 		this.modelFacade.setModel(new Model());
 		this.getViewFacade().setXorView();
-		this.setControllerXor(new ControllerXor(this,this.getModelFacade().getModel(), this.getViewFacade().getXorView()));
+		this.setControllerXor(new ControllerXor(this,this.getModelFacade().getModel(), this.getViewFacade().getMenuView()));
 		this.getControllerXor().initController();
+	}
+	
+	public void setCesarMenu() {
+		this.modelFacade.setModel(new Model());
+		this.getViewFacade().setCesarView();
+		this.setControllerCesar(new ControllerCesar(this,this.getModelFacade().getModel(), this.getViewFacade().getMenuView()));
+		this.getControllerCesar().initController();
 	}
 	
 	public ControllerXor getControllerXor() {
@@ -52,13 +59,6 @@ public class ControllerFacade {
 	}
 	public void setModelFacade(ModelFacade modelFacade) {
 		this.modelFacade = modelFacade;
-	}
-
-	public void setCesarMenu() {
-		this.modelFacade.setModel(new Model());
-		this.getViewFacade().setCesarView();
-		this.setControllerCesar(new ControllerCesar(this,this.getModelFacade().getModel(), this.getViewFacade().getCesarView()));
-		this.getControllerCesar().initController();
 	}
 
 	public ControllerCesar getControllerCesar() {
