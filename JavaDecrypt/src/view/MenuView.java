@@ -13,6 +13,7 @@ public class MenuView extends JFrame {
 	 private static int WIDTH = 500;
 	 private static int HEIGHT = 100;
 	 private JButton xorButton;
+	 private JButton cesarButton;
 	 private JLabel choiceLabel;
 
 	 public MenuView() {
@@ -31,15 +32,18 @@ public class MenuView extends JFrame {
 		  
 		  this.setChoiceLabel(new JLabel("Choose a crack :"));
 		  xorButton = new JButton("XOR");
+		  cesarButton = new JButton("CESAR");
 		  
 		  GroupLayout layout = new GroupLayout(this.getContentPane());
 		  layout.setAutoCreateGaps(true);
 		  layout.setAutoCreateContainerGaps(true);
 		  layout.setHorizontalGroup(layout.createSequentialGroup()
 		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(choiceLabel))
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(xorButton)));
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(xorButton))
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(cesarButton)));
+
 		  layout.setVerticalGroup(layout.createSequentialGroup()
-		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(choiceLabel).addComponent(xorButton)));
+		    .addGroup(layout.createParallelGroup(GroupLayout.Alignment.BASELINE).addComponent(choiceLabel).addComponent(xorButton).addComponent(cesarButton)));
 		  this.getContentPane().setLayout(layout);
 	 }
 	
@@ -49,6 +53,14 @@ public class MenuView extends JFrame {
 
 	public void setXorButton(JButton xorButton) {
 		this.xorButton = xorButton;
+	}
+
+	public JButton getCesarButton() {
+		return cesarButton;
+	}
+
+	public void setCesarButton(JButton cesarButton) {
+		this.cesarButton = cesarButton;
 	}
 
 	public JLabel getChoiceLabel() {

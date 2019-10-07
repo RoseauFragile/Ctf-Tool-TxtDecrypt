@@ -3,6 +3,7 @@ package view;
 public class ViewFacade {
 	private ViewXor xorView;
 	private MenuView menuView;
+	private ViewCesar cesarView;
 	
 	public ViewFacade() {
 		this.setMenuView();
@@ -24,6 +25,13 @@ public class ViewFacade {
 		this.xorView = new ViewXor();
 		this.getMenuView().dispose();
 	}
-	
-	
+
+	public ViewCesar getCesarView() {
+		return cesarView;
+	}
+
+	public void setCesarView() {
+		this.cesarView = new ViewCesar();
+		this.getMenuView().dispose();
+	}
 }

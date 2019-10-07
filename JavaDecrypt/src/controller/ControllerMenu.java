@@ -14,6 +14,11 @@ public class ControllerMenu {
 
 	public void initController() {
 		this.getMenuView().getXorButton().addActionListener(e -> showXorMenu());
+		this.getMenuView().getCesarButton().addActionListener(e -> showCesarMenu());
+	}
+
+	private void showCesarMenu() {
+		this.getControllerFacade().setCesarMenu();
 	}
 
 	private void showXorMenu() {
