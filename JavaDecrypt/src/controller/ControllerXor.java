@@ -15,7 +15,7 @@ public class ControllerXor {
 	private ControllerFacade controllerFacade;
 	
 	public ControllerXor(ControllerFacade controllerFacade, Model m, ViewFrame v) {
-		this.controllerFacade = controllerFacade;
+		this.setControllerFacade(controllerFacade);
 		model = m;
 		view = v;
 	}
@@ -31,7 +31,6 @@ public class ControllerXor {
 		view.getPrintDecrypted().addActionListener(e -> printDecrypted());
 		view.getSaveDecrypted().addActionListener(e -> saveDecrypted());
 		view.getChooseFile().addActionListener(e -> chooseFile());
-		view.getOpenFileMenu().addActionListener(e -> chooseFile());
 		view.getExitMenu().addActionListener(e -> exit());
 	}
 
@@ -84,5 +83,13 @@ public class ControllerXor {
 
 	public void showFrame() {
 		this.view.setVisible(true);
+	}
+
+	public ControllerFacade getControllerFacade() {
+		return controllerFacade;
+	}
+
+	public void setControllerFacade(ControllerFacade controllerFacade) {
+		this.controllerFacade = controllerFacade;
 	}
 }

@@ -32,8 +32,8 @@ public abstract class ViewFrame extends JFrame{
 	 private JLabel layout;
 	 private JMenuBar menuBar;
      private JMenu fileMenu;
+     private JMenu options;
      private JMenuItem exitMenu;
-     private JMenuItem openFileMenu;
      private JMenuItem back;
      private JMenuItem xorButton;
      private JMenuItem cesarButton;
@@ -53,7 +53,8 @@ public abstract class ViewFrame extends JFrame{
 	 public ViewFrame() {
 		super(TITLE); 
 		this.setSize(WIDTH, HEIGHT);
-		
+		ImageIcon img = new ImageIcon("wifi.png");
+		this.setIconImage(img.getImage());
 	    GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 	    GraphicsDevice defaultScreen = ge.getDefaultScreenDevice();
 	    Rectangle rect = defaultScreen.getDefaultConfiguration().getBounds();
@@ -67,19 +68,24 @@ public abstract class ViewFrame extends JFrame{
 	 
 	 private void initMenu() {
 	      this.menuBar = new JMenuBar();
-	      this.setFileMenu(new JMenu("File"));
+	      this.setFileMenu(new JMenu("Crack..."));
+	      this.setOptions(new JMenu("Options..."));
 	      this.setExitMenu(new JMenuItem("Exit"));
-	      this.setOpenFileMenu(new JMenuItem("Open"));
-	      this.setBack(new JMenuItem("Back"));
+	      this.setBack(new JMenuItem("Manifesto..."));
 	      this.setXorButton(new JMenuItem("XOR"));
 	      this.setCesarButton(new JMenuItem("Cesar"));
-	      this.fileMenu.add(openFileMenu);
-	      this.fileMenu.add(exitMenu);
+	      this.getOptions().add(exitMenu);
 	      this.fileMenu.add(xorButton);
 	      this.fileMenu.add(cesarButton);
+	      this.getFileMenu().add(back);
 	      this.menuBar.add(fileMenu);
-	      this.menuBar.add(back);
+	      this.menuBar.add(this.getOptions());
 		  this.setJMenuBar(this.menuBar);
+		  this.getJMenuBar().setBorder(BorderFactory.createEmptyBorder());
+			this.getJMenuBar().setForeground(Color.BLACK);
+			this.getJMenuBar().setBackground(new Color(0.0f,0.0f,0.0f,0.2f));
+			this.getFileMenu().setForeground(Color.BLACK);
+			this.getOptions().setForeground(Color.BLACK);
 	 	}
 	 
 	 public void initView(String pathToBackground, Color opacity) {
@@ -169,14 +175,6 @@ public abstract class ViewFrame extends JFrame{
 
 		public void setExitMenu(JMenuItem exitMenu) {
 			this.exitMenu = exitMenu;
-		}
-
-		public JMenuItem getOpenFileMenu() {
-			return openFileMenu;
-		}
-
-		public void setOpenFileMenu(JMenuItem openFileMenu) {
-			this.openFileMenu = openFileMenu;
 		}
 
 		public JMenuItem getBack() {
@@ -316,5 +314,13 @@ public abstract class ViewFrame extends JFrame{
 
 			public void setPathToBackground(String pathToBackground) {
 				this.pathToBackground = pathToBackground;
+			}
+
+			public JMenu getOptions() {
+				return options;
+			}
+
+			public void setOptions(JMenu options) {
+				this.options = options;
 			}				
 }

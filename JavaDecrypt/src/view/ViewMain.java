@@ -13,7 +13,6 @@ public class ViewMain extends ViewFrame{
          
 	public ViewMain() {
 		super();
-		System.out.println("NEW MAIN VIEW");
 		this.initMenuView();
 		this.setVisible(true);
 	}
@@ -30,7 +29,6 @@ public class ViewMain extends ViewFrame{
 		label.setOpaque(true);
 		this.setLayout( label);
 		this.add(this.getPrincipalLayout());
-		
 	}
 
 	public ViewXor getViewXor() {
