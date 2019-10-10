@@ -15,29 +15,37 @@ public class CrackCaesar extends Crack {
 	}
 
 	private void crackCaesar() {
-		String test = "Pm ol ohk hufaopun jvumpkluaphs av zhf, ol dyval pa pu jpwoly, aoha pz, if zv johunpun aol vykly vm aol slaalyz vm aol hswohila, aoha uva h dvyk jvbsk il thkl vba.";
-		ArrayList<CharOccurence> list =ToolsRefacto.getOccuringChar(test);
+		this.setCypherText(this.getCypherText().replaceAll("\\s",""));
+		ArrayList<CharOccurence> list =ToolsRefacto.getOccuringChar(this.getCypherText());
 		Collections.sort(list);
-		System.out.println(list);
-		System.out.println("decoded : " +this.replaceChar(test, list));
+		this.setClearText(this.decrypt(this.getCypherText(), list));
 	}
 	
-	//TODO replace
-	private String replaceChar(String cypherText, ArrayList<CharOccurence> list) {
-			String toDecode = cypherText;
-			for(int i =0; i <list.size(); i++) {
-				if(i == 0) {
-					list.get(i).setDecoded(' ');
-				}else if(i == 1){
-					list.get(i).setDecoded('e');
-				}else if(i == 2){
-					list.get(i).setDecoded('a');
-				}
+	private String decrypt(String cypherText, ArrayList<CharOccurence> list) {
+		String toDecode = cypherText;
+		int position = 0;
+		int decal = 0;
+		String input = ("" + list.get(0).getCh()).toLowerCase();	
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		int ePos = alphabet.indexOf("e")+1;
+		for(int i=0; i < input.length(); i++){
+		    position = alphabet.indexOf(input.charAt(i))+1;
+		}
+		decal = position - ePos;
+		for(CharOccurence ch : list) {
+			String input2 =(""+ ch.getCh()).toLowerCase();
+			int position2 = 0;
+			for(int i=0; i < input.length(); i++){
+			    position2 = alphabet.indexOf(input2.charAt(i))+1;
 			}
-			for(CharOccurence ch : list) {
-				System.out.println("Replace : " + ch.getCh() + " with : " + ch.getDecoded());
-				toDecode.replace(ch.getCh(), ch.getDecoded());
+			if((position2 - (decal +1)) < 0) {
+				int test = 26 + (position2 - (decal +1));
+				ch.setDecoded(alphabet.charAt(test));
+			}else {
+				ch.setDecoded(alphabet.charAt(position2 - (decal +1)));
 			}
-		return toDecode;
+			toDecode = toDecode.replace(ch.getCh(), ch.getDecoded());
+		}
+	return toDecode;
 	}
 }

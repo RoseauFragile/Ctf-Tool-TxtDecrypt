@@ -72,7 +72,7 @@ public class ControllerCaesar {
 	}
 	
 	private void printDecrypted() {
-		JTextArea msg = new JTextArea("The key is : " + model.getCrackXor().getKey() +"\n"+ model.getClearText());
+		JTextArea msg = new JTextArea("The text is : " + model.getClearText());
 		msg.setLineWrap(true);
 		msg.setWrapStyleWord(true);
 		JScrollPane scrollPane = new JScrollPane(msg);

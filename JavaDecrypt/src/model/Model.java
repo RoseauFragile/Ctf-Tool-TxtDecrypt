@@ -35,6 +35,7 @@ public class Model {
 	public void setCrackCaesar(String path) throws IOException{
 		this.initCrack(path);
 		this.setCrackCaesar(new CrackCaesar(this.getCypherText(),this.getLanguage(),this));
+		this.setClearText(this.getCrackCaesar().getClearText());
 	}
 
 	public void setCrackXor(String path) throws IOException{

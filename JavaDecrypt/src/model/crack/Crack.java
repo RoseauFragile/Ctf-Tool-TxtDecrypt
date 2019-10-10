@@ -10,6 +10,7 @@ public abstract class Crack {
 	private int language;
 	private Model model;
 	private String[] fiveFirstkeys;
+	private String clearText;
     
 	public Crack(String cyphertext, int language, Model model) {
 		this.setLanguage(language);
@@ -69,6 +70,14 @@ public abstract class Crack {
 
 	public void setFiveFirstkeys() {
 		this.fiveFirstkeys = new String[5];
+	}
+
+	public String getClearText() {
+		return clearText;
+	}
+
+	public void setClearText(String clearText) {
+		this.clearText = clearText;
 	}
 } 
  

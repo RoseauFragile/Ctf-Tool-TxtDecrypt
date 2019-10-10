@@ -73,7 +73,7 @@ public abstract class ViewFrame extends JFrame{
 	      this.setExitMenu(new JMenuItem("Exit"));
 	      this.setBack(new JMenuItem("Manifesto..."));
 	      this.setXorButton(new JMenuItem("XOR"));
-	      this.setCesarButton(new JMenuItem("Cesar"));
+	      this.setCesarButton(new JMenuItem("Caesar"));
 	      this.getOptions().add(exitMenu);
 	      this.fileMenu.add(xorButton);
 	      this.fileMenu.add(cesarButton);
